@@ -1,0 +1,24 @@
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner" *ngIf="authSer.isUserLoggedIn()">
+  <img (click)="home()"
+    width="90"
+    alt="Angular Logo"
+    src="../assets/logo/zion missinary school.png"
+  />
+  <h3 style="font-family: none;">{{title}}</h3>
+    <div class="spacer">
+      <button style="margin-left: 25px;" title="Normal students" mat-mini-fab (click)="normalStudents()">NS</button>
+      <button style="margin-left: 25px;" title="RTE students" mat-mini-fab (click)="RteStudents('rte')">RTES</button>
+    </div>
+    <button style="margin-right: 25px;" color="warn" mat-mini-fab (click)="logout()" title="Logout" >
+       <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+
+<!--show busy indicator-->
+<ngx-spinner  bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+<div class="view">
+  <router-outlet></router-outlet>
+</div>

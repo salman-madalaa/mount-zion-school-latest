@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - school@localhost [3]" uuid="98612d5a-b74c-4822-b7ac-e70e91f47578">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <schema name="" catalog="school"/>
+    <table name="hibernate_sequence" schema="" catalog="school" type="TABLE">
+      <column name="next_val" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+    </table>
+    <table name="roles" schema="" catalog="school" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKh8ciramu9cc9q3qcqiv4ue8a6" table="user_roles" schema="" catalog="school" columns="role_id"/>
+    </table>
+    <table name="sibling_information" schema="" catalog="school" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="age" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="student_sibling_fk" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKkbiygaq6po915reqvc6tqu3bl" columns="student_sibling_fk" ref-table="student" ref-schema="" ref-catalog="school" ref-columns="registration_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKkbiygaq6po915reqvc6tqu3bl" unique="false" columns="student_sibling_fk"/>
+    </table>
+    <table name="student" schema="" catalog="school" type="TABLE">
+      <column name="registration_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="aadhar_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="bank_account_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cast_id" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="caste" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="child_handicapped" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="class_to_join" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date_of_admission" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="date_of_birth" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="father_mother_expired" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="father_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="gender" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ifsc_code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="marks_of_identification" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile_number" sqlType="DECIMAL" precision="19" scale="2" nullable="true" jdbcType="3"/>
+      <column name="mother_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="perment_address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="present_address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="religion" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rte_students" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="samagra_id" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="siblings" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="registration_id"/>
+      <exported-key name="FKkbiygaq6po915reqvc6tqu3bl" table="sibling_information" schema="" catalog="school" columns="student_sibling_fk"/>
+    </table>
+    <table name="student_image" schema="" catalog="school" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="pic_byte" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="studentt" schema="" catalog="school" type="TABLE">
+      <column name="registration_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="aadhar_number" sqlType="DECIMAL" precision="19" scale="2" nullable="true" jdbcType="3"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="bank_account_number" sqlType="DECIMAL" precision="19" scale="2" nullable="true" jdbcType="3"/>
+      <column name="cast_id" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="caste" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="child_handicapped" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="class_to_join" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date_of_admission" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="date_of_birth" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="father_mother_expired" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="father_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="gender" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ifsc_code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="marks_of_identification" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile_number" sqlType="DECIMAL" precision="19" scale="2" nullable="true" jdbcType="3"/>
+      <column name="mother_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="religion" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="registration_id"/>
+    </table>
+    <table name="user_roles" schema="" catalog="school" type="TABLE">
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="user_id,role_id"/>
+      <foreign-key name="FKh8ciramu9cc9q3qcqiv4ue8a6" columns="role_id" ref-table="roles" ref-schema="" ref-catalog="school" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKhfh9dx7w3ubf1co1vdev94g3f" columns="user_id" ref-table="users" ref-schema="" ref-catalog="school" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKh8ciramu9cc9q3qcqiv4ue8a6" unique="false" columns="role_id"/>
+    </table>
+    <table name="users" schema="" catalog="school" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="email" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKhfh9dx7w3ubf1co1vdev94g3f" table="user_roles" schema="" catalog="school" columns="user_id"/>
+      <index name="UK6dotkott2kjsp8vw4d0m25fb7" unique="true" columns="email"/>
+      <index name="UKr43af9ap4edm43mmtq01oddj6" unique="true" columns="username"/>
+    </table>
+  </data-source>
+</component>
