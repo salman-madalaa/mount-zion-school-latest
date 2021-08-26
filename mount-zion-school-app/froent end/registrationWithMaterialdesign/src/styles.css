@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; background-color: #f9fbfe; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
   font-family: "Ubuntu" !important;
-  margin: 0;
-  padding: 30px;
+  margin: 0px;
+
   background-color: #f9fbfe im !important;
 }
 

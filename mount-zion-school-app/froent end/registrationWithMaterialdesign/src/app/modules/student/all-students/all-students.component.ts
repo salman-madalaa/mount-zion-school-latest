@@ -45,7 +45,11 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
   type: string;
   filterText = '';
   isActivateFilter: boolean = false;
-  constructor(private service: StudentService, private router: Router, public dialog: MatDialog, private route: ActivatedRoute, private loaderSer: LoaderService) { }
+  constructor(private service: StudentService, private router: Router, public dialog: MatDialog, private route: ActivatedRoute, private loaderSer: LoaderService) {
+    this.route.params.subscribe(params => {
+      this.ngOnInit();  
+    });
+  }
 
   ngOnInit(): void {
 

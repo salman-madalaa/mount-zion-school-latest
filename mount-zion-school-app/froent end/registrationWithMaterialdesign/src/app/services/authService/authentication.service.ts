@@ -11,8 +11,8 @@ export class AuthenticationService {
 
   baseUrl = environment.baseUrl;
 
-  logoutButton = new Subject();
-  logoutButton$ = this.logoutButton.asObservable();
+  // logoutButton = new Subject();
+  // logoutButton$ = this.logoutButton.asObservable();
 
   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
@@ -36,10 +36,10 @@ export class AuthenticationService {
     let options = { headers: new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', this.createBasicAuthToken(username, password)) };
-   
+
     return this.http.get(this.baseUrl + 'api/v1/basicauth',options).pipe(map((res) => {
         this.username = username;
-        this.password = password; 
+        this.password = password;
         this.registerSuccessfulLogin(username, password);
       }));
   }

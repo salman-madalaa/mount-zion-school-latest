@@ -22,11 +22,13 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { PortalModule } from '@angular/cdk/portal';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { MatNativeDateModule, MatPseudoCheckboxModule, MatRippleModule, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatNativeDateModule, MatPseudoCheckboxModule, MatRippleModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { LogoutComponent } from './logout/logout.component';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 
 const MaterialComponents=[
@@ -53,7 +55,9 @@ const MaterialComponents=[
   MatSnackBarModule,
   MatProgressSpinnerModule,
   MatGridListModule,
-  
+  MatSidenavModule,
+  MatListModule,
+
     A11yModule,
     CdkStepperModule,
     CdkTableModule,
@@ -91,6 +95,9 @@ const MaterialComponents=[
 @NgModule({
   imports: [ MaterialComponents ],
   exports:[ MaterialComponents],
-  declarations: [LogoutComponent]
+  declarations: [LogoutComponent],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ]
 })
 export class MaterialModule { }

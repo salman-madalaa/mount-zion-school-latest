@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,7 +13,7 @@ import { NewStudentComponent } from '../student/new-student/new-student.componen
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,OnDestroy {
   result: string = '';
   type:any;
   allStundents;
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.loaderSer.isHomeActive.next(true);
 
     this.type = this.route.snapshot.params['rtes'];
     if(this.type != null ){
@@ -144,5 +144,11 @@ getIndividualRteClassStudentCount(){
 
   detailsRte(className:any){
     this.router.navigate(['students/rte/class/',className]);
+  }
+
+
+  ngOnDestroy(){
+   
+    this.loaderSer.isHomeActive.next(false);
   }
 }

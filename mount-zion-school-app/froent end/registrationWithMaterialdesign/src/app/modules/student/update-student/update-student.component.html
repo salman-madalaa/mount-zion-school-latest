@@ -45,8 +45,8 @@
             <mat-card class="example-card" *ngIf="imageSrc != null">
               <img mat-card-image [src]="imageSrc" style="height: 180px; width:160px">
               <mat-card-actions>
-               <mat-icon aria-hidden="false" (click)="imageFile.click()" tile="upload" style="float:left;cursor: pointer;">cloud_upload</mat-icon>
-               <mat-icon aria-hidden="false" (click)="deleteImage()" color="warn" tile="delete" style="float:right;cursor: pointer;">delete</mat-icon>
+               <mat-icon aria-hidden="false" (click)="imageFile.click()" title="update" style="float:left;cursor: pointer;">publish</mat-icon>
+               <mat-icon aria-hidden="false" (click)="deleteImage()" color="warn" title="delete" style="float:right;cursor: pointer;">delete</mat-icon>
               </mat-card-actions>
               <input type="file" style="display: none" accept="image/*" (change)="onFileChange($event)" #imageFile>
             </mat-card>

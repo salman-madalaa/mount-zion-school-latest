@@ -9,9 +9,9 @@ import { AuthenticationService } from '../authService/authentication.service';
 })
 export class LoaderService {
 
-  public isLoading:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
-  public isLogin:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._authenticationService.isUserLoggedIn());
+  // public isLoading:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+   isHomeActive= new BehaviorSubject(false);
+  // public isLogin:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._authenticationService.isUserLoggedIn());
 
   constructor(public SpinnerSer:NgxSpinnerService,public _authenticationService:AuthenticationService,public _snackBar: MatSnackBar) { }
 
@@ -36,7 +36,6 @@ export class LoaderService {
       panelClass: ["failure"]
     });
   }
-
 
 
 }

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.authenticationSer.login(this.username, this.password).subscribe((result)=> {
       this.invalidLogin = false;
       this.loginSuccess = true;
-      this.router.navigate(['/image']);
+      this.router.navigate(['/home']);
       this._snackBar.open('Login Successful', '',{
         duration: 5000,
         verticalPosition: 'top',

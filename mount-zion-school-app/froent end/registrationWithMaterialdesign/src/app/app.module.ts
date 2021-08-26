@@ -22,9 +22,6 @@ import { ConformationDialogComponent } from './conformDialogBoxes/conformation-d
 import { ErrorMessageComponent } from './conformDialogBoxes/success/error-message/error-message.component';
 import { SuccessMessageComponent } from './conformDialogBoxes/success/success-message/success-message.component';
 import { NgxSpinnerModule} from 'ngx-spinner';
-import { ImageComponent } from './uploadimage/image/image.component';
-
-
 
 @NgModule({
   declarations: [
@@ -38,7 +35,6 @@ import { ImageComponent } from './uploadimage/image/image.component';
     ErrorMessageComponent,
     SuccessMessageComponent,
     HighlightSearchPipe,
-    ImageComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,

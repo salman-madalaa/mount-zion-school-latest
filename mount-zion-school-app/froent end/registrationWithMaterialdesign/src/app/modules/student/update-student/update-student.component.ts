@@ -154,23 +154,29 @@ export class UpdateStudentComponent implements OnInit {
 
 
   update(student) {
+    this.loaderSer.showNgxSpinner();
     this.service.updateStudent(student.registrationId, student).subscribe((data) => {
       this.dialogRef.close('success');
+      this.loaderSer.hideNgxSpinner();
     }, (error) => {
       console.log(error);
       this.dialogRef.close('failure');
+      this.loaderSer.hideNgxSpinner();
     })
   }
 
 
-  updateSibInfo(info) {
-    this.sibInfoSer.updateSibInfo(info.id, info).subscribe((data) => {
-      this.dialogRef.close('success');
-    }, (error) => {
-      console.log(error);
-      this.dialogRef.close('failure');
-    })
-  }
+  // updateSibInfo(info) {
+  //   this.loaderSer.showNgxSpinner();
+  //   this.sibInfoSer.updateSibInfo(info.id, info).subscribe((data) => {
+  //     this.dialogRef.close('success');
+  //     this.loaderSer.hideNgxSpinner();
+  //   }, (error) => {
+  //     console.log(error);
+  //     this.dialogRef.close('failure');
+  //     this.loaderSer.showNgxSpinner();
+  //   })
+  // }
 
   deleteSibInfo(i: number, info) {
     this.sibInfoSer.delete(info.id).subscribe((data) => {
