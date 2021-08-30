@@ -7,8 +7,8 @@
   <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id == 1 || id1 == 1">1st Class {{type}} Students</h4>
   <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id == 2 || id1 == 2">2nd Class {{type}} Students</h4>
   <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id == 3 || id1 == 3">3rd Class {{type}} Students</h4>
-  <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id != 1 && id != 2 && id != 3 && id != null && id != 'Nursary' && id != 'kg1' && id != 'kg2' && id1 == null"> {{id}}th Class {{type}} Students</h4>
-  <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id1 != 1 && id1 != 2 && id1 != 3 && id1 != null && id1 != 'Nursary' && id1 != 'kg1' && id1 != 'kg2' && id1 != null"> {{id1}}th Class {{type}} Students</h4>
+  <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id != 1 && id != 2 && id != 3 && id != null && id != 'Nursary' && id != 'kg1' && id != 'kg2' && id1 == null"> {{id | titlecase }} Class {{type}} Students</h4>
+  <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id1 != 1 && id1 != 2 && id1 != 3 && id1 != null && id1 != 'Nursary' && id1 != 'kg1' && id1 != 'kg2' && id1 != null"> {{id1 | titlecase }} Class {{type}} Students</h4>
   <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id == null && rte == null && id1 == null"> All Normal Students</h4>
   <h4 style="float:left;margin-top: 5px;margin-left: 33%;" *ngIf="id == null && rte != null"> All RTE Students</h4>
 
@@ -241,7 +241,7 @@
 
     </table>
 
-    <h5 *ngIf="dataSource.data.length == 0">No Stuents </h5>
+    <h5 *ngIf="dataSource.data.length == 0">No Students </h5>
 
 
   </div>

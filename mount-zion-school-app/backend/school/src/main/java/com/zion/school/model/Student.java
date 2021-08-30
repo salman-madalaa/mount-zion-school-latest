@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
-import java.math.BigInteger;
-import java.sql.Date;
 
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Lenovo on 01-03-2021.
@@ -43,7 +41,7 @@ public class Student {
     private String motherName;
 
     @Column(name = "MOBILE_NUMBER")
-    private BigInteger mobileNumber;
+    private Long mobileNumber;
 
     @Column(name = "PRESENT_ADDRESS")
     private String presentAddress;
@@ -55,6 +53,7 @@ public class Student {
     private String samagraId;
 
     @Column(name = "DATE_OF_ADMISSION")
+    @Temporal(TemporalType.DATE)
     private Date dateOfAdmission;
 
     @Column(name = "CLASS_TO_JOIN")
@@ -64,6 +63,7 @@ public class Student {
     private String gender;
 
     @Column(name = "DATE_OF_BIRTH")
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @Column(name = "MARKS_OF_IDENTIFICATION")
@@ -79,10 +79,10 @@ public class Student {
     private String castId;
 
     @Column(name = "AADHAR_NUMBER")
-    private String aadharNumber;
+    private Long aadharNumber;
 
     @Column(name = "BANK_ACCOUNT_NUMBER")
-    private String bankAccountNumber;
+    private Long bankAccountNumber;
 
     @Column(name = "IFSC_CODE")
     private String ifscCode;

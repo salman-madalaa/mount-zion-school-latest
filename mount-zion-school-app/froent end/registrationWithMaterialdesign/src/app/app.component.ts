@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   panelOpenState = false;
 
 
-  normalClass: string[] = ['Nursary','kg1', 'kg2', '1', '2', '3','4','5','6','7','8','9','10'];
-  rteClass: string[] = ['Nursary','kg1', 'kg2', '1', '2', '3','4','5','6','7','8'];
+  normalClass: string[] = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth","ninth","tenth"];
+  rteClass: string[] = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
 
 
   constructor(public authSer: AuthenticationService, private _router: Router, private dialog: MatDialog, private fb: FormBuilder,

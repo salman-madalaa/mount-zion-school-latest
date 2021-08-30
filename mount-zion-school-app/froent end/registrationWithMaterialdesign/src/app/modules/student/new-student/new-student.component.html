@@ -126,16 +126,16 @@
                   <mat-option value="nursary">Nursary Class</mat-option>
                   <mat-option value="kg1">Kg 1 Class</mat-option>
                   <mat-option value="kg2">Kg 2 Class</mat-option>
-                  <mat-option value="1">First Class</mat-option>
-                  <mat-option value="2">Second Class</mat-option>
-                  <mat-option value="3">Third Class</mat-option>
-                  <mat-option value="4">Fourth Class</mat-option>
-                  <mat-option value="5">Fifth Class</mat-option>
-                  <mat-option value="6">Sixth Class</mat-option>
-                  <mat-option value="7">Seventh Class</mat-option>
-                  <mat-option value="8">Eighth Class</mat-option>
-                  <mat-option value="9" *ngIf="isRteStudent == false">Ninth Class</mat-option>
-                  <mat-option value="10" *ngIf="isRteStudent == false">Tenth Class</mat-option>
+                  <mat-option value="first">First Class</mat-option>
+                  <mat-option value="second">Second Class</mat-option>
+                  <mat-option value="third">Third Class</mat-option>
+                  <mat-option value="fourth">Fourth Class</mat-option>
+                  <mat-option value="fifth">Fifth Class</mat-option>
+                  <mat-option value="sixth">Sixth Class</mat-option>
+                  <mat-option value="seventh">Seventh Class</mat-option>
+                  <mat-option value="eighth">Eighth Class</mat-option>
+                  <mat-option value="ninth" *ngIf="isRteStudent == false">Ninth Class</mat-option>
+                  <mat-option value="tenth" *ngIf="isRteStudent == false">Tenth Class</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -231,7 +231,9 @@
             <div class="col-md-4">
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>DateOfAdmission</mat-label>
-                <input matInput type="date" formControlName="dateOfAdmission" id="dateOfAdmission">
+                <input matInput  formControlName="dateOfAdmission" id="dateOfAdmission" [matDatepicker]="doa">
+                <mat-datepicker-toggle matSuffix [for]="doa"></mat-datepicker-toggle>
+                <mat-datepicker #doa></mat-datepicker>
               </mat-form-field>
             </div>
 

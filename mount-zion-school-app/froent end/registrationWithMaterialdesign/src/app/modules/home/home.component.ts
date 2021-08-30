@@ -41,8 +41,8 @@ export class HomeComponent implements OnInit,OnDestroy {
 
 //-----------------------RTE Students---------------------
 
-  arr = ["Nursary","kg1","kg2",1, 2, 3, 4, 5, 6, 7, 8];
-  arr2 = ["Nursary","kg1","kg2",1,2,3,4,5,6,7,8]
+  arr = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
+  arr2 = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"]
 
   getAllRteStudentsCount() {
     this.loaderSer.showNgxSpinner();
@@ -79,8 +79,8 @@ getIndividualRteClassStudentCount(){
 
 //-----------------------Normal Students---------------------
 
-  arr4 = ["Nursary","kg1","kg2",1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  arr5 = ["Nursary","kg1","kg2",1,2,3,4,5,6,7,8,9,10]
+  arr4 = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth","ninth","tenth"];
+  arr5 = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth","ninth","tenth"]
 
   getAllStudentsCounts() {
     this.loaderSer.showNgxSpinner();
@@ -148,7 +148,7 @@ getIndividualRteClassStudentCount(){
 
 
   ngOnDestroy(){
-   
+
     this.loaderSer.isHomeActive.next(false);
   }
 }

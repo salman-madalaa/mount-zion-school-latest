@@ -38,12 +38,15 @@ public class StudentImage implements Serializable {
     @Id
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "type")
     private String type;
 
-    @Column(name = "picByte", length = 5000)
+    @Lob
+    @Column(name = "picByte", columnDefinition="BLOB")
     private byte[] picByte;
 
 

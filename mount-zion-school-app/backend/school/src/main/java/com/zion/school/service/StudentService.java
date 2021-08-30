@@ -2,6 +2,7 @@ package com.zion.school.service;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zion.school.model.Student;
+import com.zion.school.repo.StudentImageRepo;
 import com.zion.school.repo.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -22,6 +23,9 @@ public class StudentService {
     @Autowired
     private MessageSource messageSources;
 
+    @Autowired
+    private StudentImageRepo studentImageRepo;
+
     @Transactional
     public Student create(Student student){
        Student student1 = studentRepository.save(student);
@@ -33,6 +37,7 @@ public class StudentService {
     }
     @Transactional
     public void delete(Integer registrationId){
+        studentImageRepo.deleteById(registrationId);
         studentRepository.deleteById(registrationId);
     }
 

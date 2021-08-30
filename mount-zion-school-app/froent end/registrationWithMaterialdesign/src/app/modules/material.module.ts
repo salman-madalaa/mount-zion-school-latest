@@ -29,6 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { ImportExportComponent } from './import-export/import-export.component';
 
 
 const MaterialComponents=[
@@ -95,7 +96,7 @@ const MaterialComponents=[
 @NgModule({
   imports: [ MaterialComponents ],
   exports:[ MaterialComponents],
-  declarations: [LogoutComponent],
+  declarations: [LogoutComponent, ImportExportComponent],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]

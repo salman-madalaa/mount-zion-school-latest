@@ -64,6 +64,24 @@
         </mat-expansion-panel>
         <mat-divider></mat-divider>
 
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Import And Export</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option routerLink="/import">
+              Import
+            </mat-list-option>
+
+            <mat-list-option routerLink="">
+              Export
+            </mat-list-option>
+
+          </mat-selection-list>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+
       </mat-nav-list>
 
     </mat-accordion>
@@ -74,14 +92,15 @@
     <div *ngIf="authSer.isUserLoggedIn()">
       <mat-toolbar color="primary" style="position: fixed;">
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon"  aria-hidden="false">menu</mat-icon>
+          <mat-icon aria-label="Side nav toggle icon" aria-hidden="false">menu</mat-icon>
         </button>
         <img (click)="home()" width="90" alt="Angular Logo" src="../assets/logo/zion missinary school.png"
           style="cursor:pointer" />
         <span>{{title}}</span>
 
         <div class="spacer">
-          <button style="margin-left: 25px;" *ngIf="loaderSer.isHomeActive.getValue()" title="Normal students" mat-mini-fab (click)="normalStudents()">NS</button>
+          <button style="margin-left: 25px;" *ngIf="loaderSer.isHomeActive.getValue()" title="Normal students"
+            mat-mini-fab (click)="normalStudents()">NS</button>
           <button style="margin-left: 25px;" *ngIf="loaderSer.isHomeActive.getValue()" title="RTE students" mat-mini-fab
             (click)="RteStudents('rte')">RTES</button>
         </div>

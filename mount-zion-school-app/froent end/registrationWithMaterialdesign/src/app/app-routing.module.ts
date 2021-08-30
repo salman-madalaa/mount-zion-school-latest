@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modules/home/home.component';
+import { ImportExportComponent } from './modules/import-export/import-export.component';
 import { LoginComponent } from './modules/login/login.component';
 import { LogoutComponent } from './modules/logout/logout.component';
 import { AllStudentsComponent } from './modules/student/all-students/all-students.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'students/class/:className',component:AllStudentsComponent,canActivate:[AuthGuardService]},
   {path:'students/rte/class/:rteClassName',component:AllStudentsComponent,canActivate:[AuthGuardService]},
   {path:'students/all',component:AllStudentsComponent,canActivate:[AuthGuardService]},
-  {path:'students/:id/all',component:AllStudentsComponent,canActivate:[AuthGuardService]}
+  {path:'students/:id/all',component:AllStudentsComponent,canActivate:[AuthGuardService]},
+  {path:'import',component:ImportExportComponent,canActivate:[AuthGuardService]}
 ];
 
 @NgModule({
