@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.math.BigInteger;
+import java.sql.Date;
 
-import java.util.*;
+import java.util.Set;
 
 /**
  * Created by Lenovo on 01-03-2021.
@@ -25,9 +27,6 @@ public class Student {
     @Column(name = "REGISTRATION_ID")
     private Integer registrationId;
 
-//    @Column(name = "PHOTO", length = 1000)
-//    private byte[] photo;
-
     @Column(name = "FIRST_NAME")
     private String firstName;
 
@@ -41,7 +40,7 @@ public class Student {
     private String motherName;
 
     @Column(name = "MOBILE_NUMBER")
-    private Long mobileNumber;
+    private BigInteger mobileNumber;
 
     @Column(name = "PRESENT_ADDRESS")
     private String presentAddress;
@@ -53,7 +52,6 @@ public class Student {
     private String samagraId;
 
     @Column(name = "DATE_OF_ADMISSION")
-    @Temporal(TemporalType.DATE)
     private Date dateOfAdmission;
 
     @Column(name = "CLASS_TO_JOIN")
@@ -63,7 +61,6 @@ public class Student {
     private String gender;
 
     @Column(name = "DATE_OF_BIRTH")
-    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @Column(name = "MARKS_OF_IDENTIFICATION")
@@ -79,10 +76,10 @@ public class Student {
     private String castId;
 
     @Column(name = "AADHAR_NUMBER")
-    private Long aadharNumber;
+    private String aadharNumber;
 
     @Column(name = "BANK_ACCOUNT_NUMBER")
-    private Long bankAccountNumber;
+    private String bankAccountNumber;
 
     @Column(name = "IFSC_CODE")
     private String ifscCode;
@@ -103,10 +100,6 @@ public class Student {
     @OneToMany(targetEntity = SiblingInformation.class, cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "Student_Sibling_fk", referencedColumnName = "REGISTRATION_ID", nullable = false, updatable = false)
     private Set<SiblingInformation> siblingInformation;
-
-//    @OneToOne(targetEntity = StudentImage.class, cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//    @JoinColumn(name = "Student_Image_fk", referencedColumnName = "Student_Image_Id")
-//    private StudentImage image;
 
 
 }

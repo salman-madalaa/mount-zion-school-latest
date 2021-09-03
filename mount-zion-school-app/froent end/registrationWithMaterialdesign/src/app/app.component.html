@@ -24,7 +24,7 @@
 
 
 
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container mat-app-background" [ngClass]="{'dark-theme-mode':isDarkTheme}">
 
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" attr.role="navigation" mode="over" fixedTopGap="65">
     <mat-accordion>
@@ -43,7 +43,7 @@
           <mat-divider></mat-divider>
           <mat-selection-list #shoes [multiple]="false">
             <mat-list-option *ngFor="let className of normalClass" [value]="normalClass"
-              routerLink="/students/class/{{className}}">
+              routerLink="/students/normal/class/{{className}}">
               Class {{className}}
             </mat-list-option>
           </mat-selection-list>
@@ -74,7 +74,7 @@
               Import
             </mat-list-option>
 
-            <mat-list-option routerLink="">
+            <mat-list-option routerLink="/export">
               Export
             </mat-list-option>
 
@@ -104,12 +104,20 @@
           <button style="margin-left: 25px;" *ngIf="loaderSer.isHomeActive.getValue()" title="RTE students" mat-mini-fab
             (click)="RteStudents('rte')">RTES</button>
         </div>
-        <button style="margin-right: 25px;" color="warn" mat-mini-fab (click)="logout()" title="Logout">
+
+        <!-- <span style="flex:auto;"></span>
+        <mat-slide-toggle [(ngModel)]="isDarkTheme" labelPosition="before" (change)="storeThemeSelection()">
+          <mat-icon>bedtime</mat-icon>
+        </mat-slide-toggle> -->
+
+       <mat-icon style="margin-right: 20px;cursor: pointer;" [matMenuTriggerFor]="menu">format_color_fill</mat-icon>
+
+        <button style="margin-right: 25px;cursor: pointer;" color="warn" mat-mini-fab (click)="logout()" title="Logout">
           <mat-icon>logout</mat-icon>
         </button>
       </mat-toolbar>
     </div>
-    <div class="view">
+    <div class="view mat-app-background">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
@@ -119,3 +127,8 @@
   [fullScreen]="true">
   <p style="color: white"> Loading... </p>
 </ngx-spinner>
+
+<mat-menu  #menu xPosition="before" >
+  <button mat-menu-item (click)="storeThemeSelection(false)" >Light</button>
+  <button mat-menu-item (click)="storeThemeSelection(true)" >Dark</button>
+</mat-menu>

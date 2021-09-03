@@ -25,14 +25,14 @@ export class LoaderService {
 
   showSucessSnakbar(message){
     this._snackBar.open(message, '', {
-      duration: 3000,
+      duration: 5000,
       panelClass: ["success"]
     });
   }
 
   showFailureSnakbar(message){
     this._snackBar.open(message, '', {
-      duration: 3000,
+      duration: 5000,
       panelClass: ["failure"]
     });
   }

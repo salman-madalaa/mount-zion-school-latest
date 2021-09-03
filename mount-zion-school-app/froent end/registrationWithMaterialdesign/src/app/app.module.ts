@@ -18,10 +18,9 @@ import { LoginComponent } from './modules/login/login.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HomeComponent } from './modules/home/home.component';
 import { FlexModule } from '@angular/flex-layout';
-import { ConformationDialogComponent } from './conformDialogBoxes/conformation-dialog.component';
-import { ErrorMessageComponent } from './conformDialogBoxes/success/error-message/error-message.component';
-import { SuccessMessageComponent } from './conformDialogBoxes/success/success-message/success-message.component';
-import { NgxSpinnerModule} from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ImportExportComponent } from './modules/import-export/import-export.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +30,9 @@ import { NgxSpinnerModule} from 'ngx-spinner';
     UpdateStudentComponent,
     LoginComponent,
     HomeComponent,
-    ConformationDialogComponent,
-    ErrorMessageComponent,
-    SuccessMessageComponent,
     HighlightSearchPipe,
+    ImportExportComponent,
+    MatConfirmDialogComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
@@ -43,8 +41,8 @@ import { NgxSpinnerModule} from 'ngx-spinner';
     MatTableModule, MatDialogModule, MatFormFieldModule, MaterialModule, NgxSpinnerModule
   ],
   entryComponents: [
-    AllStudentsComponent,UpdateStudentComponent,
-    NewStudentComponent,ErrorMessageComponent,ConformationDialogComponent,SuccessMessageComponent
+    AllStudentsComponent, UpdateStudentComponent,
+    NewStudentComponent,  MatConfirmDialogComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

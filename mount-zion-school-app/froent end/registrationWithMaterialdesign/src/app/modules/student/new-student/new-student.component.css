@@ -25,8 +25,8 @@ input::-webkit-inner-spin-button {
  height: 452px;
 }
 
-.required{
-  color:red;
-}
 
+::ng-deep .mat-form-field-required-marker {
+  color: red
+}
 

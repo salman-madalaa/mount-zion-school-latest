@@ -13,11 +13,10 @@ const routes: Routes = [
   {path: 'logout',component:LogoutComponent},
   {path:'home',component:HomeComponent,canActivate:[AuthGuardService]},
   {path:'home/:rtes',component:HomeComponent,canActivate:[AuthGuardService]},
-  {path:'students/class/:className',component:AllStudentsComponent,canActivate:[AuthGuardService]},
-  {path:'students/rte/class/:rteClassName',component:AllStudentsComponent,canActivate:[AuthGuardService]},
-  {path:'students/all',component:AllStudentsComponent,canActivate:[AuthGuardService]},
-  {path:'students/:id/all',component:AllStudentsComponent,canActivate:[AuthGuardService]},
-  {path:'import',component:ImportExportComponent,canActivate:[AuthGuardService]}
+  {path:'students/:type/class/:className',component:AllStudentsComponent,canActivate:[AuthGuardService]},
+  {path:'students/:type/all',component:AllStudentsComponent,canActivate:[AuthGuardService]},
+  {path:'import',component:ImportExportComponent,canActivate:[AuthGuardService]},
+  {path:'export',component:ImportExportComponent,canActivate:[AuthGuardService]}
 ];
 
 @NgModule({

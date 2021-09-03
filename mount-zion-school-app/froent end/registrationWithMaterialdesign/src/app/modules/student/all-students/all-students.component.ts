@@ -9,12 +9,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
-import { ConfirmDialogModel, ConformationDialogComponent } from 'src/app/conformDialogBoxes/conformation-dialog.component';
-import { ErrorMessage, ErrorMessageComponent } from 'src/app/conformDialogBoxes/success/error-message/error-message.component';
-import { SuccessMessage, SuccessMessageComponent } from 'src/app/conformDialogBoxes/success/success-message/success-message.component';
 import { Student } from 'src/app/model/Student';
+import { ConfirmationDialogService } from 'src/app/services/conformatioDialog/confirmation-dialog.service';
+import { ImportExportService } from 'src/app/services/importExport/import-export.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { StudentService } from 'src/app/services/studentService/student.service';
+import { ImportExportComponent } from '../../import-export/import-export.component';
 import { NewStudentComponent } from '../new-student/new-student.component';
 import { UpdateStudentComponent } from '../update-student/update-student.component';
 
@@ -45,14 +45,15 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
   type: string;
   filterText = '';
   isActivateFilter: boolean = false;
-  constructor(private service: StudentService, private router: Router, public dialog: MatDialog, private route: ActivatedRoute, private loaderSer: LoaderService) {
+  isRteStudent: boolean;
+  classname: string;
+  constructor(private service: StudentService, private router: Router, public dialog: MatDialog, private route: ActivatedRoute, private loaderSer: LoaderService, private _importExportService: ImportExportService,private dialogSer:ConfirmationDialogService) {
     this.route.params.subscribe(params => {
-      this.ngOnInit();  
+      this.ngOnInit();
     });
   }
 
   ngOnInit(): void {
-
 
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.firstName.toLowerCase().includes(filter) ||
@@ -60,33 +61,34 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
         data.samagraId.toString().includes(filter)
     };
 
-    this.rte = this.route.snapshot.params['id'];
-    this.id1 = this.route.snapshot.params['rteClassName'];
+
+    this.type = this.route.snapshot.params['type'];
     this.id = this.route.snapshot.params['className'];
 
 
-
-    if (this.id == null && this.id1 != null) {
+    if (this.type == "rte" && this.id != undefined && this.id != null) {
       console.log("Rte individula students load");
-      this.getRteStudents(this.id1);
-    } else if (this.id == null && this.rte != null) {
+      this.getRteStudents(this.id);
+      this.isRteStudent = true;
+      this.classname = this.id;
+
+    } else if (this.id == undefined && this.type === "rte") {
       console.log("all Rte Students Load");
       this.getAllRteStudents();
+      this.isRteStudent = true;
+      this.classname = 'all';
     }
 
-
-    if (this.id != null && this.id1 == null) {
+    if (this.type == "normal" && this.id != undefined && this.id != null) {
       console.log("normal individula class students load");
       this.getNormalStudents(this.id);
-    } else if (this.id1 == null && this.rte == null) {
+      this.isRteStudent = false;
+      this.classname = this.id;
+    } else if (this.id == undefined && this.type === "normal") {
       console.log("all normal students");
       this.getAllNormalStudents();
-    }
-
-    if (this.id1 != null && this.id == null) {
-      this.type = 'RTE'
-    } else {
-      this.type = 'Normal'
+      this.isRteStudent = false;
+      this.classname = 'all';
     }
 
   }
@@ -115,8 +117,8 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
 
   // ------------ Filter method ----------------//
   applyFilter(filterValue: string) {
-    this.filterText = filterValue.trim(); // Remove whitespace
-    filterValue = this.filterText.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.filterText = filterValue.trim();
+    filterValue = this.filterText.toLowerCase();
     this.dataSource.filter = filterValue;
 
   }
@@ -175,11 +177,9 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
       if (this.result == 'success') {
-        this.dialog.open(SuccessMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-success', data: new SuccessMessage("Student updated successfully") });
+       // this.dialog.open(SuccessMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-success', data: new SuccessMessage("Student updated successfully") });
         this.ngOnInit();
-      }
-      else if (this.result == 'failure') {
-        this.dialog.open(ErrorMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-failure', data: new ErrorMessage("Student Updation failure") });
+        this.loaderSer.showSucessSnakbar("Student Updated Successfully");
       }
     })
   }
@@ -188,35 +188,29 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
   result: string = '';
   delete(element): void {
 
-    const message = `Are you sure you want to delete this student ?` + '  ' + element.firstName;
+    const msg = `Are you sure you want to delete this student ?` + '  ' + element.firstName;
+    const title ="Student Deletion Confirm Action";
 
-    const dialogData = new ConfirmDialogModel("Confirm Action", message);
+    this.dialogSer.openConfirmationDialog(msg,title).afterClosed().subscribe(res => {
 
-    const dialogRef = this.dialog.open(ConformationDialogComponent, {
+      if (res) {
+            this.loaderSer.showNgxSpinner();
+            element.status = 'DELETED';
+            this.service.delete(element.registrationId).subscribe((data) => {
+              this.ngOnInit();
+              this.loaderSer.hideNgxSpinner();
+              this.loaderSer.showSucessSnakbar( element.firstName + " Deleted Successfully");
+            }, (error) => {
+              console.log(error);
+              this.loaderSer.hideNgxSpinner();
+              this.loaderSer.showFailureSnakbar(element.firstName + " Deleted Failure");
+            })
+          }
 
-      width: '600px',
-      data: dialogData,
-      disableClose: true,
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      this.result = dialogResult;
-
-      if (this.result) {
-        this.loaderSer.showNgxSpinner();
-        element.status = 'DELETED';
-        this.service.delete(element.registrationId).subscribe((data) => {
-          this.dialog.open(SuccessMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-success', data: new SuccessMessage("Student deleted successfully") });
-          this.ngOnInit();
-          this.loaderSer.hideNgxSpinner();
-        }, (error) => {
-          this.dialog.open(ErrorMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-failure', data: new ErrorMessage("Student deletion failure") });
-          console.log(error);
-          this.loaderSer.hideNgxSpinner();
-        })
-      }
 
     });
+
+
   }
 
   newStudent() {
@@ -225,12 +219,36 @@ export class AllStudentsComponent implements OnInit, AfterViewInit {
       this.result = dialogResult;
       if (this.result == 'success') {
         this.ngOnInit();
-        this.dialog.open(SuccessMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-success', data: new SuccessMessage("Student created Successfully") });
+        this.loaderSer.showSucessSnakbar("Student created Successfully");
       }
-      else if (this.result == 'failure') {
-        this.dialog.open(ErrorMessageComponent, { width: "600px", panelClass: 'dialog-container-custom-failure', data: new ErrorMessage("Student creation Failure") });
+    });
+  }
+
+  export() {
+    this.loaderSer.showNgxSpinner();
+    this._importExportService.exportInividual(this.isRteStudent, this.classname).subscribe(x => {
+      var blob = new Blob([x], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob);
+        return;
       }
-    })
+      const data = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = this.classname + 'Class' + this.type + 'Studnts.xlsx';
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+
+      setTimeout(function () {
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100);
+      this.loaderSer.hideNgxSpinner();
+      this.loaderSer.showSucessSnakbar(this.classname + " class " + this.type + " students data exported successfully");
+    }, (error) => {
+      console.log(error);
+      this.loaderSer.hideNgxSpinner();
+      this.loaderSer.showFailureSnakbar(this.classname+ " class " + this.type + " students data exported failure")
+    });
   }
 
 }

@@ -1,3 +1,47 @@
-<h2 >import-export works!</h2>
-<input type="file" (change)="onFileChange($event)">
-<button  (click)="import()">import</button>
+<div *ngIf="isImport">
+  <div (click)="import.click()" class="import">
+    <h4>Click here to select file to import</h4>
+  </div>
+  <input type="file" style="display: none" (change)="onFileChange($event)" #import>
+</div>
+
+
+<mat-card *ngIf="isExport">
+  <mat-card-title>Export</mat-card-title>
+
+  <mat-card-content>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>is RTE Student</mat-label>
+        <mat-select [(ngModel)]="isRteStudent" required>
+          <mat-option value="true">Yes</mat-option>
+          <mat-option value="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span></span>
+      <mat-form-field class="example-full-width" appearance="outline" >
+        <!-- <input matInput type="text" placeholder="ClassToJoin" formControlName="classToJoin" id="classToJoin"  > -->
+        <mat-label>ClassName</mat-label>
+        <mat-select [(ngModel)]="className" disableOptionCentering required>
+          <mat-option value="all">All</mat-option>
+          <mat-option value="nursary">Nursary Class</mat-option>
+          <mat-option value="kg1">Kg 1 Class</mat-option>
+          <mat-option value="kg2">Kg 2 Class</mat-option>
+          <mat-option value="first">First Class</mat-option>
+          <mat-option value="second">Second Class</mat-option>
+          <mat-option value="third">Third Class</mat-option>
+          <mat-option value="fourth">Fourth Class</mat-option>
+          <mat-option value="fifth">Fifth Class</mat-option>
+          <mat-option value="sixth">Sixth Class</mat-option>
+          <mat-option value="seventh">Seventh Class</mat-option>
+          <mat-option value="eighth">Eighth Class</mat-option>
+          <mat-option value="ninth" *ngIf="isRteStudent == false" >Ninth Class</mat-option>
+          <mat-option value="tenth" *ngIf="isRteStudent == false">Tenth Class</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="exportIndividual(isRteStudent,className)" >Import</button>
+  </mat-card-actions>
+</mat-card>

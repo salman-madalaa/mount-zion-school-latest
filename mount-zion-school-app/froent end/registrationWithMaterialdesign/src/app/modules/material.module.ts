@@ -29,8 +29,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import { ImportExportComponent } from './import-export/import-export.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import {MatMenuModule} from '@angular/material/menu';
 
 const MaterialComponents=[
   MatButtonModule,
@@ -58,6 +58,8 @@ const MaterialComponents=[
   MatGridListModule,
   MatSidenavModule,
   MatListModule,
+  MatSlideToggleModule,
+  MatMenuModule,
 
     A11yModule,
     CdkStepperModule,
@@ -96,7 +98,7 @@ const MaterialComponents=[
 @NgModule({
   imports: [ MaterialComponents ],
   exports:[ MaterialComponents],
-  declarations: [LogoutComponent, ImportExportComponent],
+  declarations: [LogoutComponent],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]

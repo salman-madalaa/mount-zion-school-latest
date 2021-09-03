@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ErrorMessage, ErrorMessageComponent } from 'src/app/conformDialogBoxes/success/error-message/error-message.component';
-import { SuccessMessageComponent, SuccessMessage } from 'src/app/conformDialogBoxes/success/success-message/success-message.component';
 import { HomeService } from 'src/app/services/home/home.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { NewStudentComponent } from '../student/new-student/new-student.component';
@@ -119,18 +116,18 @@ getIndividualRteClassStudentCount(){
       this.result = dialogResult;
       if (this.result == 'success') {
         this.getAllStudentsCounts();
-        this.dialog.open(SuccessMessageComponent, { width: "600px", data: new SuccessMessage("Added Successfully") });
+        this.loaderSer.showSucessSnakbar("Student added successfully");
       }
       else if (this.result == 'failure') {
-        this.dialog.open(ErrorMessageComponent, { width: "600px", data: new ErrorMessage("Addition Failure") });
+        this.loaderSer.showFailureSnakbar("Student added Failure"); 
       }
     });
   }
 
 
 
-  allStuents(){
-    this.router.navigate(['students/all']);
+  allNormalStuents(normal:String){
+    this.router.navigate(['students/',normal,'all']);
   }
 
   allRteStuents(rte:any){
@@ -138,14 +135,9 @@ getIndividualRteClassStudentCount(){
   }
 
 
-  details(className:any){
-    this.router.navigate(['students/class/',className]);
+  details(type:string,className:any){
+    this.router.navigate(['students/',type,'class',className]);
   }
-
-  detailsRte(className:any){
-    this.router.navigate(['students/rte/class/',className]);
-  }
-
 
   ngOnDestroy(){
 

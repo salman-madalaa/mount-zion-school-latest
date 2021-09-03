@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormControlName, FormBuilder, FormArray } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ErrorMessage,ErrorMessageComponent } from 'src/app/conformDialogBoxes/success/error-message/error-message.component';
 import { Student } from 'src/app/model/Student';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { StudentService } from 'src/app/services/studentService/student.service';
@@ -104,8 +103,8 @@ export class NewStudentComponent implements OnInit {
       }
     }, (error) => {
       console.log(error);
-      this.dialog.open(ErrorMessageComponent, { width: "600px",panelClass: 'dialog-container-custom-failure', data: new ErrorMessage("Student creation Failure") });
-     // this.dialogRef.close('failure');
+      this.loaderSer.hideNgxSpinner();
+      this.loaderSer.showFailureSnakbar("Student creation Failure");
     })
   }
 

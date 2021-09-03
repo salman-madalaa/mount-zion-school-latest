@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ConfirmationDialogService } from 'src/app/services/conformatioDialog/confirmation-dialog.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { SiblingInformationService } from 'src/app/services/siblingInformationService/sibling-information.service';
 import { StudentService } from 'src/app/services/studentService/student.service';
@@ -31,7 +32,7 @@ export class UpdateStudentComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UpdateStudentComponent>, private service: StudentService,
     private router: Router, private sibInfoSer: SiblingInformationService, public _snackBar: MatSnackBar,
-    public loaderSer: LoaderService) {
+    public loaderSer: LoaderService, private dialogSer: ConfirmationDialogService) {
 
     this.student = this.formBuilder.group({
       registrationId: new FormControl('', []),
@@ -157,11 +158,10 @@ export class UpdateStudentComponent implements OnInit {
     this.loaderSer.showNgxSpinner();
     this.service.updateStudent(student.registrationId, student).subscribe((data) => {
       this.dialogRef.close('success');
-      this.loaderSer.hideNgxSpinner();
     }, (error) => {
       console.log(error);
-      this.dialogRef.close('failure');
       this.loaderSer.hideNgxSpinner();
+      this.loaderSer.showFailureSnakbar("Student Updated Failure");
     })
   }
 
@@ -182,11 +182,11 @@ export class UpdateStudentComponent implements OnInit {
     this.sibInfoSer.delete(info.id).subscribe((data) => {
       this.removeSibling(i);
       this.loaderSer.showSucessSnakbar("Sibling delete successfully");
-      // this.openSnackBar("successfully");
+
     }, (error) => {
       console.log(error);
       this.loaderSer.showFailureSnakbar("Sibling delete failure");
-      // this.openSnackBar("failure");
+
     });
   }
 
@@ -234,6 +234,7 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   onFileChange(event) {
+    this.loaderSer.showNgxSpinner();
     this.selectedFile = event.target.files[0];
 
     const image = new FormData();
@@ -253,16 +254,24 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   deleteImage() {
-    this.service.deleteImage(this.regId).subscribe((data) => {
-      this.imageSrc = null;
-      this.loaderSer.hideNgxSpinner();
-      this.loaderSer.showSucessSnakbar("Image delete succesfully");
-    }, (error) => {
-      console.log(error);
-      this.loaderSer.hideNgxSpinner();
-      this.loaderSer.showFailureSnakbar("Image delete failure");
-    });
 
+    const msg = `Are you sure you want to delete this image ?`;
+    const title = "Image Deletion Confirm Action";
+
+    this.dialogSer.openConfirmationDialog(msg, title).afterClosed().subscribe(res => {
+      if (res) {
+        this.loaderSer.showNgxSpinner();
+        this.service.deleteImage(this.regId).subscribe((data) => {
+          this.imageSrc = null;
+          this.loaderSer.hideNgxSpinner();
+          this.loaderSer.showSucessSnakbar("Image delete succesfully");
+        }, (error) => {
+          console.log(error);
+          this.loaderSer.hideNgxSpinner();
+          this.loaderSer.showFailureSnakbar("Image delete failure");
+        });
+      }
+    });
   }
 
 

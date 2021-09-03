@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   isLogged: boolean = true;
   panelOpenState = false;
 
+  isDarkTheme: boolean = false;
 
   normalClass: string[] = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth","ninth","tenth"];
   rteClass: string[] = ["nursary","kg1","kg2","first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isDarkTheme = localStorage.getItem('theme') == "Dark" ? true : false;
     this.authSer.logout();
     this._router.navigateByUrl("/login");
   }
@@ -55,4 +57,8 @@ export class AppComponent implements OnInit {
     this._router.navigate(['/students/class/', className]);
   }
 
+  storeThemeSelection(val:boolean) {
+    this.isDarkTheme = val;
+    localStorage.setItem('theme', this.isDarkTheme ? "Dark" : "Light");
+  }
 }

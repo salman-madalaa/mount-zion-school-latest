@@ -7,12 +7,23 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ImportExportService {
+  exportIndividual(isRteStudent: boolean, className: any) {
+    throw new Error('Method not implemented.');
+  }
   baseUrl = environment.baseUrl;
 
   constructor(private http:HttpClient) { }
 
   import(im):Observable<any>{
-    let options = { headers: new HttpHeaders().set('Content-Type', 'multipart/form-data; charset=utf-8') };
     return this.http.post(this.baseUrl + 'api/exportimport/upload',im);
   }
+
+  export():Observable<Blob>{
+    return this.http.get(this.baseUrl + 'api/exportimport/download',{responseType:'blob'});
+  }
+
+  exportInividual(isRteStudent:boolean,className:String):Observable<Blob>{
+    return this.http.get(this.baseUrl + 'api/exportimport/download/'+isRteStudent+ '/' + className,{responseType:'blob'});
+  }
+
 }
