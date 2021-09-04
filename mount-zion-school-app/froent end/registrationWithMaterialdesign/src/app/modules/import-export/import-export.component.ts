@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/services/conformatioDialog/confirmation-dialog.service';
 import { ImportExportService } from 'src/app/services/importExport/import-export.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { createImmediatelyInvokedArrowFunction } from 'typescript';
 
 
 @Component({
@@ -15,14 +15,14 @@ import { createImmediatelyInvokedArrowFunction } from 'typescript';
 export class ImportExportComponent implements OnInit {
 
   selectedFile: File;
-
+  public import: FormGroup;
   isImport:boolean;
   isExport:boolean;
   isRteStudent :boolean;
   type:any;
   className:any;
 
-  constructor(private _importExportService: ImportExportService, private route: ActivatedRoute,
+  constructor(private _importExportService: ImportExportService, private route: ActivatedRoute,private formBuilder: FormBuilder,
     private router: Router,private loaderSer:LoaderService,private dialogSer:ConfirmationDialogService) {
 
     if(this.router.url == '/import'){
@@ -33,10 +33,14 @@ export class ImportExportComponent implements OnInit {
       this.isExport = true;
     }
 
-    console.log(this.router.url);
     }
 
   ngOnInit(): void {
+
+    this.import = this.formBuilder.group({
+      isRteStudent: new FormControl('', [Validators.required]),
+      className: new FormControl('', [Validators.required]),
+    });
 
   }
 
@@ -74,9 +78,11 @@ export class ImportExportComponent implements OnInit {
   }
 
 
-   exportIndividual(a,b){
+  exportIndividual(value){
+    this.isRteStudent = value.isRteStudent;
+    this.className = value.className; 
     this.loaderSer.showNgxSpinner();
-    this._importExportService.exportInividual(a,b).subscribe(x=>{
+    this._importExportService.exportInividual(this.isRteStudent,this.className).subscribe(x=>{
       var blob = new Blob([x], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
      if(window.navigator && window.navigator.msSaveOrOpenBlob){
        window.navigator.msSaveOrOpenBlob(blob);

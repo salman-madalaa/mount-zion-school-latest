@@ -243,7 +243,9 @@
             <div class="col-md-4">
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>DateOfAdmission</mat-label>
-                <input matInput type="date" formControlName="dateOfAdmission" id="dateOfAdmission">
+                 <input matInput  formControlName="dateOfAdmission" id="dateOfAdmission" [matDatepicker]="doa">
+                <mat-datepicker-toggle matSuffix [for]="doa"></mat-datepicker-toggle>
+                <mat-datepicker #doa></mat-datepicker>
               </mat-form-field>
             </div>
 
